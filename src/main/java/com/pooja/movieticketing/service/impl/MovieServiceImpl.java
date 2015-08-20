@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.pooja.movieticketing.enitity.Movie;
 import com.pooja.movieticketing.enitity.Theater;
 import com.pooja.movieticketing.service.MovieService;
 import com.pooja.movieticketing.service.TheaterService;
@@ -18,6 +19,10 @@ public class MovieServiceImpl implements MovieService {
 	public String createMovie() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String displayMovieName() {
+		return "Lagaan";
 	}
 
 	public void readMovie(String movieName) {

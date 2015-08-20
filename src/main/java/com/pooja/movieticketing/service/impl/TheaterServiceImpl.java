@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pooja.movieticketing.enitity.Screen;
 import com.pooja.movieticketing.enitity.Theater;
+import com.pooja.movieticketing.enitity.impl.TheaterImpl;
 import com.pooja.movieticketing.service.MovieService;
 import com.pooja.movieticketing.service.TheaterService;
 

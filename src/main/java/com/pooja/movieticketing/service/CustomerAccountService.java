@@ -7,5 +7,5 @@ public interface CustomerAccountService {
 	public void updateAccount(String accountId);
 	public void deleteAccount(String accountId);
 	public void viewBookingHistory(String accountId);
-	
+	public boolean isPasswordValid(String customerId, String password);
 }

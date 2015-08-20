@@ -1,5 +1,7 @@
 package com.pooja.movieticketing.enitity.impl;
 
+import java.util.List;
+
 import com.pooja.movieticketing.enitity.Theater;
 
 public class TheaterImpl implements Theater {
@@ -7,6 +9,15 @@ public class TheaterImpl implements Theater {
 	private String address;
 	private String phone;
 	private String aminities;
+	private int screens;
+	private List<ScreenImpl> screensList;
+	
+	public TheaterImpl(String theaterName, int screens) {
+		this.theaterName=theaterName;
+		for(int i=1;i<=screens;i++) {
+			screensList.add(new ScreenImpl("Screen"+screens));
+		}
+	}
 	
 	public String getTheaterName() {
 		return theaterName;

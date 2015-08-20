@@ -1,14 +1,43 @@
 package com.pooja.movieticketing.enitity.impl;
 
+import java.util.List;
+
 import com.pooja.movieticketing.enitity.Ticket;
 
 public class TicketImpl implements Ticket {
 	private String ticketId;
-	private String seatNum;
+	private List<String> seatNum;
 	private String cutomerType;
 	private double discount;
 	private double price;
+	private String movieName;
+	private String threaterName;
+	private String screenName;
 	
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
+	}
+
+	public String getThreaterName() {
+		return threaterName;
+	}
+
+	public void setThreaterName(String threaterName) {
+		this.threaterName = threaterName;
+	}
+
+	public String getScreenName() {
+		return screenName;
+	}
+
+	public void setScreenName(String screenName) {
+		this.screenName = screenName;
+	}
+
 	public TicketImpl(String ticketId) {
 		this.ticketId=ticketId;
 	}
@@ -19,11 +48,11 @@ public class TicketImpl implements Ticket {
 	public void setTicketId(String ticketId) {
 		this.ticketId = ticketId;
 	}
-	public String getSeatNum() {
+	public List<String> getSeatNum() {
 		return seatNum;
 	}
-	public void setSeatNum(String seatNum) {
-		this.seatNum = seatNum;
+	public void setSeatNum(List<String> seatNum) {
+		this.seatNum.addAll(seatNum);
 	}
 	public String getCutomerType() {
 		return cutomerType;
@@ -43,4 +72,6 @@ public class TicketImpl implements Ticket {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	
 }
