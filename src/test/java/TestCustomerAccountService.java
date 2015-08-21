@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.pooja.movieticketing.service.CustomerAccountService;
 
-@ContextConfiguration(locations = {"classpath:spring-context.xml"})
+@ContextConfiguration(locations = {"classpath:spring-context.xml"}) 
 public class TestCustomerAccountService extends AbstractJUnit4SpringContextTests  {
 	@Autowired
 	private CustomerAccountService custService;
