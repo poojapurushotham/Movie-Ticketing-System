@@ -1,37 +1,72 @@
 package com.pooja.movieticketing.enitity.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pooja.movieticketing.enitity.Account;
+import com.pooja.movieticketing.enitity.Customer;
+import com.pooja.movieticketing.enitity.Ticket;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="account")
 public class AccountImpl implements Account {
+	
+	@Id
+	@Column(name="idaccount")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String accountId;
+	
+	@Column(name="account_type")
 	private String accountType;
+	
+	@Column(name="payment_type")
 	private String paymetType;
+	
+	@Column(name="card_num")
 	private Long cardNum;
+	
+	@Column(name="first_name")
 	private String firstName;
+	
+	@Column(name="last_name")
 	private String lastName;
+	
+	@Column(name="exp_month")
 	private String expMonth;
+	
+	@Column(name="exp_year")
 	private String expYear;
+	
+	@Column(name="zip")
 	private String zip;
+	
+	@Column(name="cvv")
 	private String cvv;
-	private List<String> purchases;
 	
-	public AccountImpl(String accountId) {
-		this.accountId=accountId;
-	}
+	@OneToMany(mappedBy = "account", targetEntity=TicketImpl.class, cascade=CascadeType.ALL)
+	private List<Ticket> purchases;
 	
-	public List<String> getPurchases() {
-		return purchases;
-	}
-	public void setPurchases(String ticketId) {
-		purchases.add(ticketId);
-	}
+	@OneToOne(targetEntity=CustomerImpl.class, optional=true, cascade=CascadeType.ALL, mappedBy="account")
+	@JoinColumn(name="customer_idcustomer")
+	private Customer customer;
+	
+	//constructor
+	public AccountImpl() {}
+	
 	public String getAccountId() {
 		return accountId;
-	}
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
 	}
 	public String getAccountType() {
 		return accountType;
@@ -86,5 +121,23 @@ public class AccountImpl implements Account {
 	}
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
+	}
+	
+	public List<Ticket> getPurchases() {
+		return purchases;
+	}
+	
+	public void addUserAuditHistory(Ticket purchase) {
+		if(this.purchases==null){
+			this.purchases = new ArrayList<Ticket>();
+		}
+		this.purchases.add(purchase);
+	}
+	
+	@Override
+	public String toString() {
+		return "AccountImpl [accountId=" + accountId + ", accountType="
+				+ accountType + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", zip=" + zip + ", customer=" + customer + "]";
 	}
 }

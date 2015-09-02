@@ -1,16 +1,15 @@
-package com.pooja.movieticketing.service;
+package com.pooja.movieticketing.repository;
 
 import com.pooja.movieticketing.enitity.Account;
 import com.pooja.movieticketing.enitity.Customer;
 
-public interface CustomerAccountService {
-	
+public interface CustomerAccountRepository {
 	//customer
 	public int addCustomer(Customer customer);
-	
-	public void updateCustomer(Customer customer);
 
 	public Customer getCustomer(int customerId);
+	
+	public void updateCustomer(Customer customer);
 	
 	public void deleteCustomer(int customerId);
 	
@@ -22,6 +21,5 @@ public interface CustomerAccountService {
 	public void updateAccount(Account account);
 	
 	public void deleteAccount(int accountId);
-	
-	public boolean isPasswordValid(int customerId, String password);
+
 }

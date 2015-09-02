@@ -68,7 +68,6 @@ public class TicketingServiceImpl implements TicketingService{
 		} while(in.next() != null && numSeats-- > 0);
 		in.close();
 		return price;
-		
 	}
 
 	private List<String> reserveSeats(ScreenImpl screen) {
@@ -89,6 +88,18 @@ public class TicketingServiceImpl implements TicketingService{
 		return null;
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void viewBookingHistory(String accountId) {
+		// TODO Auto-generated method stub
+		//List<TicketImpl> tickets = new ArrayList<TicketImpl>(); 
+		//AccountImpl acc = getAccount(accountId);
+		//for (String t : acc.getPurchases()) {
+		//	tickets.add(new TicketImpl(t));
+		//}
+		//for (TicketImpl t : tickets) {
+		//	System.out.println("Ticket Number" + t.getTicketId() + "Price" + t.getPrice() + "Seats" + t.getSeatNum());
+		//}
 	}
 	
 

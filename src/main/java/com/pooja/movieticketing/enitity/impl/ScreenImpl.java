@@ -3,13 +3,44 @@ package com.pooja.movieticketing.enitity.impl;
 import java.util.Date;
 import java.util.List;
 
-import com.pooja.movieticketing.enitity.Screen;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import com.pooja.movieticketing.enitity.Movie;
+import com.pooja.movieticketing.enitity.Screen;
+import com.pooja.movieticketing.enitity.Ticket;
+
+@Entity
+@Table(name="screen")
 public class ScreenImpl implements Screen {
-	private String seats;
-	private Date showTime;
+	
+	@Id
+	@Column(name="screen_name")
 	private String screenName;
+	
+	@Column(name="seats")
+	private String seats;
+	
+	@Column(name="show_time")
+	private Date showTime;
+	
+	@Column(name="reserved")
 	private List<String> reserved;
+	
+	@OneToMany(mappedBy = "tickets", targetEntity=TicketImpl.class, cascade=CascadeType.ALL)
+	private List<Ticket> ticketsList;
+	
+	@OneToMany(mappedBy = "movie", targetEntity=MovieImpl.class, cascade=CascadeType.ALL)
+	private List<Movie> movies;
+	
+	//constructor
+	public ScreenImpl() {}
 	
 	public String getScreenName() {
 		return screenName;

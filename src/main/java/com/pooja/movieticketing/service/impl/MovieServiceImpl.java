@@ -2,11 +2,17 @@ package com.pooja.movieticketing.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.irahul.tbtf.entity.User;
 import com.pooja.movieticketing.enitity.Movie;
 import com.pooja.movieticketing.enitity.Theater;
+import com.pooja.movieticketing.repository.CustomerAccountRepository;
+import com.pooja.movieticketing.repository.MovieRepository;
+import com.pooja.movieticketing.repository.TheaterRepository;
 import com.pooja.movieticketing.service.MovieService;
 import com.pooja.movieticketing.service.TheaterService;
 
@@ -14,35 +20,44 @@ import com.pooja.movieticketing.service.TheaterService;
 public class MovieServiceImpl implements MovieService {
 
 	@Autowired
-	private TheaterService theaterService;
+	private TheaterRepository theaterRepository;
 	
-	public String createMovie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@Autowired
+	private MovieRepository movieRepository;
 	
-	public String displayMovieName() {
-		return "Lagaan";
+	@Transactional
+	public int addMovie(Movie movie) {
+		return movieRepository.addMovie(movie);
 	}
 
-	public void readMovie(String movieName) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void getMovie(int movieId) {
+		movieRepository.getMovie(movieId);
 		
 	}
 
-	public void updateMovie(String movieName) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void updateMovie(Movie movie) {
+		movieRepository.updateMovie(movie);
 		
 	}
 
-	public void deleteMovie(String movieName) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void deleteMovie(int movieId) {
+		movieRepository.deleteMovie(movieId);
 		
 	}
 
-	public List<Theater> viewAllTheaters(String movieName) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<Theater> viewAllTheaters(int movieId) {
+		//make sure user is valid
+		Movie movie = movieRepository.getMovie(movieId);
+		if(movie==null){
+			throw new IllegalArgumentException("Invalid movie Id");
+		}
+				
+		//get accounts		
+		return movieRepository.getTheaterList(movieId);
 	}
 	
 }
