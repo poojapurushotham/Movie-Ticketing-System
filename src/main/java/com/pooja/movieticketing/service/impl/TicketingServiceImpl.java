@@ -7,12 +7,12 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pooja.movieticketing.enitity.Screen;
-import com.pooja.movieticketing.enitity.Theater;
-import com.pooja.movieticketing.enitity.Ticket;
-import com.pooja.movieticketing.enitity.impl.AccountImpl;
-import com.pooja.movieticketing.enitity.impl.ScreenImpl;
-import com.pooja.movieticketing.enitity.impl.TicketImpl;
+import com.pooja.movieticketing.entity.Screen;
+import com.pooja.movieticketing.entity.Theater;
+import com.pooja.movieticketing.entity.Ticket;
+import com.pooja.movieticketing.entity.impl.AccountImpl;
+import com.pooja.movieticketing.entity.impl.ScreenImpl;
+import com.pooja.movieticketing.entity.impl.TicketImpl;
 import com.pooja.movieticketing.service.CustomerAccountService;
 import com.pooja.movieticketing.service.MovieService;
 import com.pooja.movieticketing.service.TheaterService;
@@ -30,19 +30,18 @@ public class TicketingServiceImpl implements TicketingService{
 	@Autowired
 	private CustomerAccountService customerAccountService;
 	
-	public TicketImpl getTicket(String ticketId) {
+	public TicketImpl getTicket(int ticketId) {
 		return new TicketImpl(ticketId);
 	}
 	
-	public ScreenImpl getScreen(String screenName) {
-		return new ScreenImpl(screenName);
+	public ScreenImpl getScreen() {
+		return new ScreenImpl();
 	}
-	
 	
 	public TicketImpl buyTicket(String screenName, String movieName, String theaterName, double discount) {
 		// TODO Auto-generated method stub
-		TicketImpl ticket = getTicket("A000");
-		List<String> seats = reserveSeats(getScreen("screenName"));
+		TicketImpl ticket = getTicket(10);
+		List<String> seats = reserveSeats(getScreen());
 		ticket.setSeatNum(seats);
 		ticket.setDiscount(discount);
 		ticket.setMovieName(movieName);
@@ -101,6 +100,5 @@ public class TicketingServiceImpl implements TicketingService{
 		//	System.out.println("Ticket Number" + t.getTicketId() + "Price" + t.getPrice() + "Seats" + t.getSeatNum());
 		//}
 	}
-	
 
 }

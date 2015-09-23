@@ -2,15 +2,15 @@ package com.pooja.movieticketing.service;
 
 import java.util.List;
 
-import com.pooja.movieticketing.enitity.Screen;
-import com.pooja.movieticketing.enitity.Ticket;
-import com.pooja.movieticketing.enitity.impl.ScreenImpl;
-import com.pooja.movieticketing.enitity.impl.TicketImpl;
+import com.pooja.movieticketing.entity.Screen;
+import com.pooja.movieticketing.entity.Ticket;
+import com.pooja.movieticketing.entity.impl.ScreenImpl;
+import com.pooja.movieticketing.entity.impl.TicketImpl;
 
 public interface TicketingService {
-	public TicketImpl getTicket(String ticketId);
+	public TicketImpl getTicket(int ticketId);
 	
-	public ScreenImpl getScreen(String screenName);
+	public ScreenImpl getScreen();
 	
 	public TicketImpl buyTicket(String screenName, String movieName, String theaterName, double discount);
 }

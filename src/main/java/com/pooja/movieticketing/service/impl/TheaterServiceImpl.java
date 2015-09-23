@@ -7,10 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pooja.movieticketing.enitity.Movie;
-import com.pooja.movieticketing.enitity.Screen;
-import com.pooja.movieticketing.enitity.Theater;
-import com.pooja.movieticketing.enitity.impl.TheaterImpl;
+import com.pooja.movieticketing.entity.Movie;
+import com.pooja.movieticketing.entity.Screen;
+import com.pooja.movieticketing.entity.Theater;
 import com.pooja.movieticketing.repository.TheaterRepository;
 import com.pooja.movieticketing.service.MovieService;
 import com.pooja.movieticketing.service.TheaterService;
@@ -24,36 +23,45 @@ public class TheaterServiceImpl implements TheaterService {
 	@Autowired
 	private TheaterRepository theaterRepository;
 	
-	public String createTheater() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Theater addTheater(Theater theater) {
+		int id = theaterRepository.addTheater(theater);
+		return getTheater(id);
 	}
 
-	public void readTheater(String theaterName) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public Theater getTheater(int theaterId) {
+		return theaterRepository.getTheater(theaterId);		
 	}
 
-	public void updateTheater(String theaterName) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public List<Theater> getTheater(long zip) {
+		return theaterRepository.searchTheater(zip);
+	}
+	
+	@Transactional
+	public void updateTheater(Theater theater) {
+		theaterRepository.updateTheater(theater);		
 	}
 
-	public void deleteTheater(String theaterName) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void deleteTheater(int theaterId) {
+		theaterRepository.deleteTheater(theaterId);		
 	}
 
+	@Transactional
 	public List<Screen> viewAllScreens(String theaterName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional
 	public void viewAllShowTimes(Screen screen) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Transactional
 	public void viewAllSeats(Screen screen) {
 		// TODO Auto-generated method stub
 		

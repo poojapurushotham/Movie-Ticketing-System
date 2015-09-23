@@ -7,14 +7,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.irahul.tbtf.entity.User;
-import com.pooja.movieticketing.enitity.Movie;
-import com.pooja.movieticketing.enitity.Theater;
-import com.pooja.movieticketing.repository.CustomerAccountRepository;
+import com.pooja.movieticketing.entity.Movie;
+import com.pooja.movieticketing.entity.Theater;
 import com.pooja.movieticketing.repository.MovieRepository;
 import com.pooja.movieticketing.repository.TheaterRepository;
 import com.pooja.movieticketing.service.MovieService;
-import com.pooja.movieticketing.service.TheaterService;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -26,13 +23,20 @@ public class MovieServiceImpl implements MovieService {
 	private MovieRepository movieRepository;
 	
 	@Transactional
-	public int addMovie(Movie movie) {
-		return movieRepository.addMovie(movie);
+	public Movie addMovie(Movie movie) {
+		int id = movieRepository.addMovie(movie);
+		return getMovie(id);
 	}
 
 	@Transactional
-	public void getMovie(int movieId) {
-		movieRepository.getMovie(movieId);
+	public Movie getMovie(int movieId) {
+		return movieRepository.getMovie(movieId);
+		
+	}
+	
+	@Transactional
+	public List<Movie> getMovie(String movieName) {
+		return movieRepository.searchMovie(movieName);
 		
 	}
 
@@ -59,5 +63,5 @@ public class MovieServiceImpl implements MovieService {
 		//get accounts		
 		return movieRepository.getTheaterList(movieId);
 	}
-	
+
 }

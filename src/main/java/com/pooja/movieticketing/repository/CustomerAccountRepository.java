@@ -1,13 +1,17 @@
 package com.pooja.movieticketing.repository;
 
-import com.pooja.movieticketing.enitity.Account;
-import com.pooja.movieticketing.enitity.Customer;
+import java.util.List;
+
+import com.pooja.movieticketing.entity.Account;
+import com.pooja.movieticketing.entity.Customer;
 
 public interface CustomerAccountRepository {
 	//customer
 	public int addCustomer(Customer customer);
 
 	public Customer getCustomer(int customerId);
+	
+	public List<Customer> searchCustomer(String username);
 	
 	public void updateCustomer(Customer customer);
 	

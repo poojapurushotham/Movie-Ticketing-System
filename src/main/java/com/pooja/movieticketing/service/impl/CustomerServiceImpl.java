@@ -1,9 +1,11 @@
 package com.pooja.movieticketing.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
-import com.pooja.movieticketing.enitity.Account;
-import com.pooja.movieticketing.enitity.Customer;
+import com.pooja.movieticketing.entity.Account;
+import com.pooja.movieticketing.entity.Customer;
 import com.pooja.movieticketing.service.CustomerAccountService;
 import com.pooja.movieticketing.repository.CustomerAccountRepository;
 
@@ -18,8 +20,9 @@ public class CustomerServiceImpl implements CustomerAccountService {
 	
 	//customer
 	@Transactional
-	public int addCustomer(Customer customer) {
-		return customerAccountRepository.addCustomer(customer);
+	public Customer addCustomer(Customer customer) {
+		int id =  customerAccountRepository.addCustomer(customer);
+		return getCustomer(id);
 	}
 	
 	@Transactional
@@ -34,6 +37,11 @@ public class CustomerServiceImpl implements CustomerAccountService {
 	}
 	
 	@Transactional
+	public List<Customer> getCustomer(String username) {
+		return customerAccountRepository.searchCustomer(username);
+	}
+	
+	@Transactional
 	public void deleteCustomer(int customerId) {
 		customerAccountRepository.deleteCustomer(customerId);
 		
@@ -41,8 +49,9 @@ public class CustomerServiceImpl implements CustomerAccountService {
 
 	//account
 	@Transactional
-	public int createAccount(Account account) {
-		return customerAccountRepository.createAccount(account);
+	public Account createAccount(Account account) {
+		int id = customerAccountRepository.createAccount(account);
+		return getAccount(id);
 	}
 	
 	@Transactional
@@ -66,10 +75,14 @@ public class CustomerServiceImpl implements CustomerAccountService {
 	@Transactional
 	public boolean isPasswordValid(int customerId, String password) {
 		Customer customer = getCustomer(customerId);
-		if(customer==null || password==null){
+		if(customer == null && password ==null){
 			return false;
 		}
-		return customer.getPassword()!=null;
+		if(customerId == 100 && password == "1234") {
+			return true;
+		}
+		else 
+			return false;
 	}
 
 

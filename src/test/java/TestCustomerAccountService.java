@@ -12,21 +12,24 @@ public class TestCustomerAccountService extends AbstractJUnit4SpringContextTests
 	@Autowired
 	private CustomerAccountService custService;
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testPassword1(){
-		Assert.assertEquals(true, custService.isPasswordValid("User1","1234"));
+		Assert.assertEquals(true, custService.isPasswordValid(100,"1234"));
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testPassword2(){
-		Assert.assertEquals(false, custService.isPasswordValid("User1","12345"));
+		Assert.assertEquals(false, custService.isPasswordValid(101,"12345"));
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testPassword3(){
-		Assert.assertEquals(false, custService.isPasswordValid("User","1234"));
+		Assert.assertEquals(false, custService.isPasswordValid(1,"1234"));
 
 	}
 	

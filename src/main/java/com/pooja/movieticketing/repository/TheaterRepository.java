@@ -2,8 +2,8 @@ package com.pooja.movieticketing.repository;
 
 import java.util.List;
 
-import com.pooja.movieticketing.enitity.Movie;
-import com.pooja.movieticketing.enitity.Theater;
+import com.pooja.movieticketing.entity.Movie;
+import com.pooja.movieticketing.entity.Theater;
 
 public interface TheaterRepository {
 		
@@ -16,5 +16,7 @@ public interface TheaterRepository {
 	public void deleteTheater(int theaterId);
 	
 	public List<Movie> getMovieList(int theaterId);
+
+	public List<Theater> searchTheater(long zip);
 	
 }	

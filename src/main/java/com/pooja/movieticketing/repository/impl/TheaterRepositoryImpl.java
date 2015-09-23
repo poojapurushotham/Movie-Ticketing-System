@@ -1,16 +1,20 @@
 package com.pooja.movieticketing.repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pooja.movieticketing.enitity.Movie;
-import com.pooja.movieticketing.enitity.Theater;
+import com.pooja.movieticketing.entity.Movie;
+import com.pooja.movieticketing.entity.Theater;
+import com.pooja.movieticketing.entity.impl.TheaterImpl;
 import com.pooja.movieticketing.repository.MovieRepository;
 import com.pooja.movieticketing.repository.TheaterRepository;
-
+import com.pooja.movieticketing.service.impl.TheaterServiceImpl;
 
 @Repository
 public class TheaterRepositoryImpl implements TheaterRepository {
@@ -21,7 +25,6 @@ public class TheaterRepositoryImpl implements TheaterRepository {
 	//customer
 	public int addTheater(Theater theater) {
 		return (int) this.sessionFactory.getCurrentSession().save(theater);
-		
 	}
 
 	public Theater getTheater(int theaterId) {
@@ -29,11 +32,11 @@ public class TheaterRepositoryImpl implements TheaterRepository {
 	}
 
 	public void updateTheater(Theater theater) {
-		this.sessionFactory.getCurrentSession().update(Theater);
+		this.sessionFactory.getCurrentSession().update(theater);
 	}
 	
-	public void deleteTheater(int TheaterId) {
-		this.sessionFactory.getCurrentSession().delete(this.get(theaterId));
+	public void deleteTheater(int theaterId) {
+		this.sessionFactory.getCurrentSession().delete(this.getTheater(theaterId));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -44,4 +47,10 @@ public class TheaterRepositoryImpl implements TheaterRepository {
 		return movies;
 	}
 
+	@Override
+	public List<Theater> searchTheater(long zip) {
+		List<Theater> theaters = new ArrayList<>();
+		theaters.addAll(this.sessionFactory.getCurrentSession().get(TheaterImpl.class, zip));
+		return null;
+	}	
 }
