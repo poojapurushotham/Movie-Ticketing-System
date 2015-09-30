@@ -8,7 +8,7 @@ import javax.ws.rs.ext.Provider;
 import org.springframework.stereotype.Component;
 
 
-import com.pooja.movieticketing.service.exception.TBTFException;
+import com.pooja.movieticketing.service.exception.MovieTicketingException;
 
 /**
  * Return HTTP 409 with response body 
@@ -18,10 +18,10 @@ import com.pooja.movieticketing.service.exception.TBTFException;
  */
 @Provider
 @Component
-public class TBTFExceptionMapper implements ExceptionMapper<TBTFException>{
+public class MovieTicketingExceptionMapper implements ExceptionMapper<MovieTicketingException>{
 
 	@Override
-	public Response toResponse(TBTFException ex) {
+	public Response toResponse(MovieTicketingException ex) {
 		return Response.status(Status.CONFLICT).entity(new HttpError(ex)).build();
 	}
 

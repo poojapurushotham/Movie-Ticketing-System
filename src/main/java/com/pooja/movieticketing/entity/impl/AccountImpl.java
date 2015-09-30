@@ -10,6 +10,7 @@ import com.pooja.movieticketing.entity.Ticket;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +51,7 @@ public class AccountImpl implements Account {
 	private String expYear;
 	
 	@Column(name="zip")
-	private String zip;
+	private long zip;
 	
 	@Column(name="cvv")
 	private String cvv;
@@ -58,7 +59,7 @@ public class AccountImpl implements Account {
 	@OneToMany(mappedBy = "account", targetEntity=TicketImpl.class, cascade=CascadeType.ALL)
 	private List<Ticket> purchases;
 	
-	@OneToOne(targetEntity=CustomerImpl.class, optional=true, cascade=CascadeType.ALL, mappedBy="account")
+	@OneToOne(fetch = FetchType.LAZY, targetEntity=CustomerImpl.class)
 	@JoinColumn(name="customer_idcustomer")
 	private Customer customer;
 	
@@ -110,10 +111,10 @@ public class AccountImpl implements Account {
 	public void setExpYear(String expYear) {
 		this.expYear = expYear;
 	}
-	public String getZip() {
+	public long getZip() {
 		return zip;
 	}
-	public void setZip(String zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 	public String getCvv() {
@@ -127,7 +128,7 @@ public class AccountImpl implements Account {
 		return purchases;
 	}
 	
-	public void addUserAuditHistory(Ticket purchase) {
+	public void addTicketPurchaseHistory(Ticket purchase) {
 		if(this.purchases==null){
 			this.purchases = new ArrayList<Ticket>();
 		}
@@ -139,5 +140,10 @@ public class AccountImpl implements Account {
 		return "AccountImpl [accountId=" + accountId + ", accountType="
 				+ accountType + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", zip=" + zip + ", customer=" + customer + "]";
+	}
+
+	@Override
+	public void setAccountId(int accountId) {
+		this.accountId=accountId;
 	}
 }

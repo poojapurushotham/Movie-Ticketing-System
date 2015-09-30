@@ -24,9 +24,9 @@ import com.pooja.movieticketing.entity.Movie;
 import com.pooja.movieticketing.entity.impl.MovieImpl;
 import com.pooja.movieticketing.http.entity.HttpMovie;
 import com.pooja.movieticketing.service.MovieService;
-import com.pooja.movieticketing.service.exception.TBTFException;
+import com.pooja.movieticketing.service.exception.MovieTicketingException;
 
-@Path("/movies")
+@Path("/movie")
 @Component
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -42,7 +42,7 @@ public class MovieResource {
 	public Response createMovie(HttpMovie newMovie){
 		Movie movieToCreate = convert(newMovie);
 		Movie addedMovie = movieService.addMovie(movieToCreate);
-		return Response.status(Status.CREATED).header("Location", "/movies/"+addedMovie.getMovieId()).entity(new HttpMovie(addedMovie)).build();
+		return Response.status(Status.CREATED).header("Location", "/movie/"+addedMovie.getMovieId()).entity(new HttpMovie(addedMovie)).build();
 	}	
 
 	@GET
@@ -55,8 +55,8 @@ public class MovieResource {
 	
 	@GET
 	@Path("/")
-	@Wrapped(element="movies")
-	public List<HttpMovie> getMovieSearch(@QueryParam("movieName") String movieName) throws TBTFException{
+	@Wrapped(element="movie")
+	public List<HttpMovie> getMovieSearch(@QueryParam("movieName") String movieName) throws MovieTicketingException{
 		List<Movie> found = movieService.getMovie(movieName);
 		List<HttpMovie> returnList = new ArrayList<>(found.size());
 		for(Movie movie:found){

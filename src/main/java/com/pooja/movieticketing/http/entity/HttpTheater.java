@@ -3,7 +3,6 @@ package com.pooja.movieticketing.http.entity;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.pooja.movieticketing.entity.Customer;
 import com.pooja.movieticketing.entity.Theater;
 
 /**

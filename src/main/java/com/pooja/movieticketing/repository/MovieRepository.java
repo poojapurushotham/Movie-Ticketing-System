@@ -15,7 +15,7 @@ public interface MovieRepository {
 	
 	public void deleteMovie(int movieId);
 	
-	public List<Theater> getTheaterList(int movieId);
+//	public List<Theater> getTheaterList(int movieId);
 
 	public List<Movie> searchMovie(String movieName);
 	

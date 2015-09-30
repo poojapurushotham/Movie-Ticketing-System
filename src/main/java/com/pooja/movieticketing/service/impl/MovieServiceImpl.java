@@ -8,60 +8,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pooja.movieticketing.entity.Movie;
-import com.pooja.movieticketing.entity.Theater;
 import com.pooja.movieticketing.repository.MovieRepository;
-import com.pooja.movieticketing.repository.TheaterRepository;
 import com.pooja.movieticketing.service.MovieService;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
 	@Autowired
-	private TheaterRepository theaterRepository;
-	
-	@Autowired
 	private MovieRepository movieRepository;
 	
 	@Transactional
+	@Override
 	public Movie addMovie(Movie movie) {
 		int id = movieRepository.addMovie(movie);
 		return getMovie(id);
 	}
 
 	@Transactional
+	@Override
 	public Movie getMovie(int movieId) {
 		return movieRepository.getMovie(movieId);
 		
 	}
 	
 	@Transactional
+	@Override
 	public List<Movie> getMovie(String movieName) {
 		return movieRepository.searchMovie(movieName);
 		
 	}
 
 	@Transactional
+	@Override
 	public void updateMovie(Movie movie) {
 		movieRepository.updateMovie(movie);
 		
 	}
 
 	@Transactional
+	@Override
 	public void deleteMovie(int movieId) {
 		movieRepository.deleteMovie(movieId);
 		
-	}
-
-	@Transactional
-	public List<Theater> viewAllTheaters(int movieId) {
-		//make sure user is valid
-		Movie movie = movieRepository.getMovie(movieId);
-		if(movie==null){
-			throw new IllegalArgumentException("Invalid movie Id");
-		}
-				
-		//get accounts		
-		return movieRepository.getTheaterList(movieId);
 	}
 
 }

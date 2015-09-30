@@ -6,18 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.pooja.movieticketing.entity.Movie;
-import com.pooja.movieticketing.entity.Screen;
-import com.pooja.movieticketing.entity.Theater;
-import com.pooja.movieticketing.entity.Ticket;
+import com.pooja.movieticketing.entity.Showtime;
 
 @Entity
 @Table(name="movie")
@@ -55,17 +51,25 @@ public class MovieImpl implements Movie{
 	@Column(name="rating")
 	private double rating;
 	
-	@Column(name="length")
-	private double length;
+	@Column(name="reviews")
+	private String reviews;
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "screen_has_movie", targetEntity=ScreenImpl.class)	
+	@Column(name="movie_length")
+	private double movie_length;
+	
+	/*
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "movie_showtime", targetEntity=ScreenImpl.class)
+	@JoinTable(name="movie_showtime", joinColumns = { @JoinColumn(name = "movie_idmovie", nullable = false) }, 
+	inverseJoinColumns = { @JoinColumn(name = "bank_location_idbank_location", nullable = false) })
 	private List<Screen> screens;
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "theater_has_movie", targetEntity=TheaterImpl.class)	
-	private List<Theater> theaters;
 	
-	@OneToMany(mappedBy = "ticket", targetEntity=TicketImpl.class, cascade=CascadeType.ALL)	
-    private List<Ticket> tickets;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "movie_showtime", targetEntity=TheaterImpl.class)	
+	private List<Theater> theaters;
+	*/
+	
+	@OneToMany(mappedBy = "movie", targetEntity=ShowtimeImpl.class, cascade=CascadeType.ALL)	
+    private List<Showtime> showtimes;
 	
 	//constructor 
 	public MovieImpl() {}
@@ -122,10 +126,10 @@ public class MovieImpl implements Movie{
 		this.rating = rating;
 	}
 	public double getLength() {
-		return length;
+		return movie_length;
 	}
 	public void setLength(double length) {
-		this.length = length;
+		this.movie_length = length;
 	}
 	public String getProductionHouse() {
 		return productionHouse;
@@ -140,7 +144,7 @@ public class MovieImpl implements Movie{
 				+ ", language=" + language + ", genre=" + genre + ", synopsis="
 				+ synopsis + ", cast=" + cast + ", director=" + director
 				+ ", productionHouse=" + productionHouse + ", releaseDate="
-				+ releaseDate + ", rating=" + rating + ", length=" + length
+				+ releaseDate + ", rating=" + rating + ", length=" + movie_length
 				+ "]";
 	}
 	

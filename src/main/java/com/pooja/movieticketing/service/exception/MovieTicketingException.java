@@ -6,15 +6,15 @@ package com.pooja.movieticketing.service.exception;
  *
  */
 @SuppressWarnings("serial")
-public class TBTFException extends RuntimeException {
+public class MovieTicketingException extends RuntimeException {
 	private ErrorCode errorCode;
 
-	public TBTFException(ErrorCode code, String message, Throwable throwable) {
+	public MovieTicketingException(ErrorCode code, String message, Throwable throwable) {
 		super(message, throwable);
 		this.errorCode = code;
 	}
 	
-	public TBTFException(ErrorCode code, String message) {
+	public MovieTicketingException(ErrorCode code, String message) {
 		super(message);
 		this.errorCode = code;
 	}

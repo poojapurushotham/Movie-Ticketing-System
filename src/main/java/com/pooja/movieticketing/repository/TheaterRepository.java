@@ -15,7 +15,7 @@ public interface TheaterRepository {
 	
 	public void deleteTheater(int theaterId);
 	
-	public List<Movie> getMovieList(int theaterId);
+//	public List<Movie> getMovieList(int theaterId);
 
 	public List<Theater> searchTheater(long zip);
 	

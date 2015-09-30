@@ -7,7 +7,7 @@ package com.pooja.movieticketing.service.exception;
  *
  */
 @SuppressWarnings("serial")
-public class InvalidFieldException extends TBTFException {
+public class InvalidFieldException extends MovieTicketingException {
 
 	public InvalidFieldException(String message, Throwable throwable) {
 		super(ErrorCode.INVALID_FIELD, message, throwable);

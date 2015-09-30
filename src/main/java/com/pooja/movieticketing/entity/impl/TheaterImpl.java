@@ -5,18 +5,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.pooja.movieticketing.entity.Movie;
 import com.pooja.movieticketing.entity.Screen;
+import com.pooja.movieticketing.entity.Showtime;
 import com.pooja.movieticketing.entity.Theater;
-import com.pooja.movieticketing.entity.Ticket;
 
 @Entity
 @Table(name="theater")
@@ -45,14 +42,19 @@ public class TheaterImpl implements Theater {
 	@Column(name="screens")
 	private int screens;
 	
-	@OneToMany(mappedBy = "screen", targetEntity=ScreenImpl.class, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "theater", targetEntity=ScreenImpl.class, cascade=CascadeType.ALL)
 	private List<Screen> screensList;
 	
+	/*
 	@OneToMany(mappedBy = "tickets", targetEntity=TicketImpl.class, cascade=CascadeType.ALL)
 	private List<Ticket> ticketsList;
 	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "theater_has_movie", targetEntity=MovieImpl.class)	
 	private List<Movie> movies;
+	*/
+	
+	@OneToMany(mappedBy = "theater", targetEntity=ShowtimeImpl.class, cascade=CascadeType.ALL)	
+    private List<Showtime> showtimes;
 	
 	public TheaterImpl() {}
 	

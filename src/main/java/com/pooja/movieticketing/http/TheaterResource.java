@@ -24,9 +24,9 @@ import com.pooja.movieticketing.entity.Theater;
 import com.pooja.movieticketing.entity.impl.TheaterImpl;
 import com.pooja.movieticketing.http.entity.HttpTheater;
 import com.pooja.movieticketing.service.TheaterService;
-import com.pooja.movieticketing.service.exception.TBTFException;
+import com.pooja.movieticketing.service.exception.MovieTicketingException;
 
-@Path("/theaters")
+@Path("/theater")
 @Component
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -42,7 +42,7 @@ public class TheaterResource {
 	public Response createTheater(HttpTheater newTheater){
 		Theater theaterToCreate = convert(newTheater);
 		Theater addedTheater = theaterService.addTheater(theaterToCreate);
-		return Response.status(Status.CREATED).header("Location", "/theaters/"+addedTheater.getTheaterId()).entity(new HttpTheater(addedTheater)).build();
+		return Response.status(Status.CREATED).header("Location", "/theater/"+addedTheater.getTheaterId()).entity(new HttpTheater(addedTheater)).build();
 	}	
 
 	@GET
@@ -55,8 +55,8 @@ public class TheaterResource {
 	
 	@GET
 	@Path("/")
-	@Wrapped(element="theaters")
-	public List<HttpTheater> getTheaterSearch(@QueryParam("zip") long zip) throws TBTFException{
+	@Wrapped(element="theater")
+	public List<HttpTheater> getTheaterSearch(@QueryParam("zip") long zip) throws MovieTicketingException{
 		List<Theater> found = theaterService.getTheater(zip);
 		List<HttpTheater> returnList = new ArrayList<>(found.size());
 		for(Theater theater:found){

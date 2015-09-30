@@ -20,28 +20,33 @@ public class CustomerServiceImpl implements CustomerAccountService {
 	
 	//customer
 	@Transactional
+	@Override
 	public Customer addCustomer(Customer customer) {
 		int id =  customerAccountRepository.addCustomer(customer);
 		return getCustomer(id);
 	}
 	
 	@Transactional
+	@Override
 	public void updateCustomer(Customer customer) {
 		customerAccountRepository.updateCustomer(customer);
 		
 	}
 	
 	@Transactional
+	@Override
 	public Customer getCustomer(int customerId) {
 		return customerAccountRepository.getCustomer(customerId);
 	}
 	
 	@Transactional
+	@Override
 	public List<Customer> getCustomer(String username) {
 		return customerAccountRepository.searchCustomer(username);
 	}
 	
 	@Transactional
+	@Override
 	public void deleteCustomer(int customerId) {
 		customerAccountRepository.deleteCustomer(customerId);
 		
@@ -49,30 +54,35 @@ public class CustomerServiceImpl implements CustomerAccountService {
 
 	//account
 	@Transactional
+	@Override
 	public Account createAccount(Account account) {
 		int id = customerAccountRepository.createAccount(account);
 		return getAccount(id);
 	}
 	
 	@Transactional
+	@Override
 	public Account getAccount(int accountId) {
 		return customerAccountRepository.getAccount(accountId);
 		
 	}
 
 	@Transactional
+	@Override
 	public void updateAccount(Account account) {
 		customerAccountRepository.updateAccount(account);
 		
 	}
 
 	@Transactional
+	@Override
 	public void deleteAccount(int accountId) {
 		customerAccountRepository.deleteAccount(accountId);
 		
 	}
 	
 	@Transactional
+	@Override
 	public boolean isPasswordValid(int customerId, String password) {
 		Customer customer = getCustomer(customerId);
 		if(customer == null && password ==null){
@@ -84,6 +94,4 @@ public class CustomerServiceImpl implements CustomerAccountService {
 		else 
 			return false;
 	}
-
-
 }

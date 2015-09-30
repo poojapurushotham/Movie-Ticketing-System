@@ -3,7 +3,7 @@ package com.pooja.movieticketing.http.exception;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.pooja.movieticketing.service.exception.TBTFException;
+import com.pooja.movieticketing.service.exception.MovieTicketingException;
 
 @XmlRootElement(name = "error")
 public class HttpError {
@@ -21,7 +21,7 @@ public class HttpError {
 
 	protected HttpError(){}
 	
-	public HttpError(TBTFException ex) {
+	public HttpError(MovieTicketingException ex) {
 		status=409;
 		code=ex.getErrorCode()==null?"":ex.getErrorCode().name();
 		message=ex.getMessage();

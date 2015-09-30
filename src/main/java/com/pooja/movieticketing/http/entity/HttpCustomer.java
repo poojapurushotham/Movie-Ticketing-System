@@ -20,7 +20,7 @@ public class HttpCustomer {
 	@XmlElement
 	public int id;
 	
-	@XmlElement//(name="foo")
+	@XmlElement
 	public String username;
 	
 	@XmlElement

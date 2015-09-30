@@ -24,10 +24,10 @@ import com.pooja.movieticketing.entity.Customer;
 import com.pooja.movieticketing.entity.impl.CustomerImpl;
 import com.pooja.movieticketing.http.entity.HttpCustomer;
 import com.pooja.movieticketing.service.CustomerAccountService;
-//import com.pooja.movieticketing.service.exception.TBTFException;
-import com.pooja.movieticketing.service.exception.TBTFException;
+//import com.pooja.movieticketing.service.exception.MovieTicketingException;
+import com.pooja.movieticketing.service.exception.MovieTicketingException;
 
-@Path("/customers")
+@Path("/customer")
 @Component
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -39,11 +39,10 @@ public class CustomerResource {
 	
 	@POST
 	@Path("/")
-	
 	public Response createCustomer(HttpCustomer newCustomer){
 		Customer customerToCreate = convert(newCustomer);
 		Customer addedCustomer = customerService.addCustomer(customerToCreate);
-		return Response.status(Status.CREATED).header("Location", "/customers/"+addedCustomer.getCustomerId()).entity(new HttpCustomer(addedCustomer)).build();
+		return Response.status(Status.CREATED).header("Location", "/customer/"+addedCustomer.getCustomerId()).entity(new HttpCustomer(addedCustomer)).build();
 	}	
 
 	@GET
@@ -56,8 +55,8 @@ public class CustomerResource {
 	
 	@GET
 	@Path("/")
-	@Wrapped(element="customers")
-	public List<HttpCustomer> getCustomerSearch(@QueryParam("username") String custName) throws TBTFException{
+	@Wrapped(element="customer")
+	public List<HttpCustomer> getCustomerSearch(@QueryParam("username") String custName) throws MovieTicketingException{
 		List<Customer> found = customerService.getCustomer(custName);
 		List<HttpCustomer> returnList = new ArrayList<>(found.size());
 		for(Customer customer:found){
