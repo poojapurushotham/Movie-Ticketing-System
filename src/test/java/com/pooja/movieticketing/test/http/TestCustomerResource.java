@@ -24,7 +24,7 @@ import com.pooja.movieticketing.http.HttpCustomer;
  */
 public class TestCustomerResource {
 	private static final String HTTP_HOST = "http://localhost:8080";
-	private static final String URI_PATH = "pooja-movieticketing/rest/customers";
+	private static final String URI_PATH = "pooja-movieticketing/rest/customer";
 	
 	private Client client = ClientBuilder.newClient();
 	private WebTarget target;
@@ -63,7 +63,7 @@ public class TestCustomerResource {
 	
 	@Test
 	public void testCreateCustomersNoParamsXml(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<customers/>", MediaType.APPLICATION_XML));		
+		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<customer/>", MediaType.APPLICATION_XML));		
 		verifyInvalid(response);
 	}
 	
@@ -76,7 +76,7 @@ public class TestCustomerResource {
 	
 	@Test
 	public void testCreateCustomersNoParamsJson(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{customers:{}}", MediaType.APPLICATION_JSON));		
+		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{customer:{}}", MediaType.APPLICATION_JSON));		
 		verifyInvalid(response);
 	}
 	

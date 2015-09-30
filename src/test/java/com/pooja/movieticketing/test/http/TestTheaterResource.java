@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.pooja.movieticketing.http.HttpError;
-import com.pooja.movieticketing.http.HttpCustomer;
+import com.pooja.movieticketing.http.HttpTheater;
 /**
  * Test error scenarios using a Client
  * @author pooja
@@ -24,7 +24,7 @@ import com.pooja.movieticketing.http.HttpCustomer;
  */
 public class TestTheaterResource {
 	private static final String HTTP_HOST = "http://localhost:8080";
-	private static final String URI_PATH = "pooja-movieticketing/rest/customers";
+	private static final String URI_PATH = "pooja-movieticketing/rest/theater";
 	
 	private Client client = ClientBuilder.newClient();
 	private WebTarget target;
@@ -35,7 +35,7 @@ public class TestTheaterResource {
 	}
 
 	@Test
-	public void testGetCustomersNoParamsJson(){						
+	public void testGetTheatersNoParamsJson(){						
 		Response response =	target.request().accept(MediaType.APPLICATION_JSON).get();
 
 		//you can use this to print the response
@@ -47,7 +47,7 @@ public class TestTheaterResource {
 	}
 	
 	@Test
-	public void testGetCustomersNoParamsXml(){						
+	public void testGetTheatersNoParamsXml(){						
 		Response response =	target.request().accept(MediaType.APPLICATION_XML).get();		
 		verifyMissing(response);
 	}
@@ -62,28 +62,28 @@ public class TestTheaterResource {
 	}
 	
 	@Test
-	public void testCreateCustomersNoParamsXml(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<customers/>", MediaType.APPLICATION_XML));		
+	public void testCreateTheatersNoParamsXml(){					
+		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<theater/>", MediaType.APPLICATION_XML));		
 		verifyInvalid(response);
 	}
 	
 	@Test
-	public void testCreateCustomersNoParamsEntityXml(){					
-		HttpCustomer customerToSend = new HttpCustomer();		
-		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity(customerToSend, MediaType.APPLICATION_XML));	
+	public void testCreateTheatersNoParamsEntityXml(){					
+		HttpTheater theaterToSend = new HttpTheater();		
+		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity(theaterToSend, MediaType.APPLICATION_XML));	
 		verifyInvalid(response);
 	}
 	
 	@Test
-	public void testCreateCustomersNoParamsJson(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{customer:{}}", MediaType.APPLICATION_JSON));		
+	public void testCreateTheatersNoParamsJson(){					
+		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{theater:{}}", MediaType.APPLICATION_JSON));		
 		verifyInvalid(response);
 	}
 	
 	@Test
-	public void testCreateCustomersNoParamsEntityJson(){					
-		HttpCustomer customerToSend = new HttpCustomer();		
-		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity(customerToSend, MediaType.APPLICATION_JSON));		
+	public void testCreateTheatersNoParamsEntityJson(){					
+		HttpTheater theaterToSend = new HttpTheater();		
+		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity(theaterToSend, MediaType.APPLICATION_JSON));		
 		verifyInvalid(response);
 	}
 
@@ -97,25 +97,27 @@ public class TestTheaterResource {
 	}
 	
 	@Test
-	public void testCreateAndGetCustomer(){					
-		HttpCustomer customerToSend = new HttpCustomer();
-		customerToSend.username="foo"+new Random().nextInt(99999);
-		customerToSend.emailId="bar"+new Random().nextInt(99999);;
-		customerToSend.password="12345";
+	public void testCreateAndGetTheater(){					
+		HttpTheater theaterToSend = new HttpTheater();
+		theaterToSend.theaterName="foo"+new Random().nextInt(99999);
+		theaterToSend.address="bar"+new Random().nextInt(99999);;
+		theaterToSend.screens=3;
+		theaterToSend.zip=94086;
 		
-		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity(customerToSend, MediaType.APPLICATION_JSON));
+		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity(theaterToSend, MediaType.APPLICATION_JSON));
 		
-		HttpCustomer createResponse = response.readEntity(HttpCustomer.class);
+		HttpTheater createResponse = response.readEntity(HttpTheater.class);
 		//System.err.println(createResponse);
 		Assert.assertEquals(201, response.getStatus());
-		Assert.assertEquals(createResponse.username, customerToSend.username);
-		Assert.assertEquals(createResponse.emailId, customerToSend.emailId);
+		Assert.assertEquals(createResponse.theaterName, theaterToSend.theaterName);
+		Assert.assertEquals(createResponse.address, theaterToSend.address);
+		Assert.assertEquals(createResponse.screens, theaterToSend.screens);
+		Assert.assertEquals(createResponse.zip, theaterToSend.zip);
 		Assert.assertNotNull(createResponse.id);
-		Assert.assertNull(createResponse.password);
 		
-		//search for just created user		
-		Response search = target.queryParam("username", customerToSend.username).queryParam("emailId", customerToSend.emailId).request().accept(MediaType.APPLICATION_JSON).get();
-		List<HttpCustomer> searchResponse = search.readEntity(new GenericType<List<HttpCustomer>>(){});
+		//search for just created theater		
+		Response search = target.queryParam("theaterName", theaterToSend.theaterName).queryParam("address", theaterToSend.address).queryParam("screens", theaterToSend.screens).queryParam("zip", theaterToSend.zip).request().accept(MediaType.APPLICATION_JSON).get();
+		List<HttpTheater> searchResponse = search.readEntity(new GenericType<List<HttpTheater>>(){});
 		Assert.assertEquals(searchResponse.get(0), createResponse);		
 	}
 }

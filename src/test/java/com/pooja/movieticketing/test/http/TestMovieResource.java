@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.pooja.movieticketing.http.HttpError;
-import com.pooja.movieticketing.http.HttpCustomer;
 import com.pooja.movieticketing.http.HttpMovie;
 /**
  * Test error scenarios using a Client
@@ -25,7 +24,7 @@ import com.pooja.movieticketing.http.HttpMovie;
  */
 public class TestMovieResource {
 	private static final String HTTP_HOST = "http://localhost:8080";
-	private static final String URI_PATH = "pooja-movieticketing/rest/movies";
+	private static final String URI_PATH = "pooja-movieticketing/rest/movie";
 	
 	private Client client = ClientBuilder.newClient();
 	private WebTarget target;
@@ -63,7 +62,7 @@ public class TestMovieResource {
 	
 	@Test
 	public void testCreateMoviesNoParamsXml(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<movies/>", MediaType.APPLICATION_XML));		
+		Response response =	target.request().accept(MediaType.APPLICATION_XML).post(Entity.entity("<movie/>", MediaType.APPLICATION_XML));		
 		verifyInvalid(response);
 	}
 	
@@ -76,7 +75,7 @@ public class TestMovieResource {
 	
 	@Test
 	public void testCreateMoviesNoParamsJson(){					
-		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{movies:{}}", MediaType.APPLICATION_JSON));		
+		Response response =	target.request().accept(MediaType.APPLICATION_JSON).post(Entity.entity("{movie:{}}", MediaType.APPLICATION_JSON));		
 		verifyInvalid(response);
 	}
 	

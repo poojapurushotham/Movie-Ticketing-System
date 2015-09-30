@@ -3,8 +3,6 @@ package com.pooja.movieticketing.http;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.pooja.movieticketing.entity.Customer;
-
 /**
  * Select fields we want exposed to the REST layer. Separation from business/data layer. 
  * 
